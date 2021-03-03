@@ -1,0 +1,14 @@
+% zsh
+# Reload zsh autocompletions. zcompdump
+rm ~/{.zcompdump,.zcompdump_custom} && zsh -c compinit
+
+% zsh, antibody
+
+# Update antibody bundle
+antibody bundle < <bundle_file>
+$ bundle_file: locate antibody.txt
+
+% fd, zsh, find
+
+# Fd find ignored files and directories
+fd -uu <search_term> <path>

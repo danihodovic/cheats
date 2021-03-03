@@ -1,0 +1,4 @@
+% firefox
+
+# Start Firefox in safe mode
+firefox --safe-mode

@@ -1,0 +1,5 @@
+% django
+
+# Change users password
+./manage.py changepassword <username>
+$ username: mkdir scripts -p && printf "from django.contrib.auth import get_user_model\nUser = get_user_model()\ndef run():\n\tfor user in User.objects.all():\n\t\tprint(user.username)" > scripts/print_users.py && ./manage.py runscript print_users

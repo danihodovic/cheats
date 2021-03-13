@@ -1,0 +1,4 @@
+% dig, dns
+
+# Lookup SRV record
+dig +short drone-github-web.service.consul SRV

@@ -1,0 +1,4 @@
+% rclone
+
+# Backup to Google Photos
+rclone sync -P Pictures/ googlephotos:album/Screenshots

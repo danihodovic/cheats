@@ -1,0 +1,4 @@
+% xresources, xrdb
+
+# Reload xresources -- changes take affect on software restart
+xrdb ~/.Xresources

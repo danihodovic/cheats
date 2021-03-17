@@ -1,0 +1,6 @@
+% images, pictures, imagemagick
+
+# Rotate a picture
+convert <source> -rotate <degrees> <source>_rotated.jpg
+$ source: fd .
+$ degrees: printf '90\n180\n270'

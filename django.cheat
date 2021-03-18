@@ -2,4 +2,13 @@
 
 # Change users password
 ./manage.py changepassword <username>
-$ username: mkdir scripts -p && printf "from django.contrib.auth import get_user_model\nUser = get_user_model()\ndef run():\n\tfor user in User.objects.all():\n\t\tprint(user.username)" > scripts/print_users.py && ./manage.py runscript print_users
+$ username: ./manage.py list_users
+
+# Generate admin
+./manage.py admin_generator <app> <model>
+$ app:
+$ model:
+
+# Reset model migrations to zero
+./manage.py migrate <app> zero
+$ app: ./manage.py list_apps

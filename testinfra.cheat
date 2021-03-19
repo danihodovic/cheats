@@ -1,0 +1,4 @@
+% testinfra
+
+# Run testinfra molecule test
+pytest -s --connection=ansible --ansible-inventory=~/.cache/molecule/$(basename $PWD)/default/inventory/ansible_inventory.yml

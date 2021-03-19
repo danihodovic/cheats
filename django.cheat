@@ -6,7 +6,7 @@ $ username: ./manage.py list_users
 
 # Generate admin
 ./manage.py admin_generator <app> <model>
-$ app:
+$ app: ./manage.py list_apps
 $ model:
 
 # Reset model migrations to zero

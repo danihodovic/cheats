@@ -1,0 +1,11 @@
+% ledger
+
+# Print this weeks balance sheet
+ledger -M balance --begin=<begin> --end=<end>
+$ begin: date -d last-monday +%Y-%m-%d
+$ end:   date -d sunday +%Y-%m-%d
+
+# Print this months balance sheet
+ledger -M balance --begin=<begin> --end=<end>
+$ begin: date -d "-0 month -$(($(date +%d)-1)) days" +%Y-%m-%d
+$ end:   date -d "-$(date +%d) days +1 month" +%Y-%m-%d

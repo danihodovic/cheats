@@ -4,3 +4,8 @@
 convert <source> -rotate <degrees> <source>_rotated.jpg
 $ source: fd .
 $ degrees: printf '90\n180\n270'
+
+# Resize an image smaller or larger
+convert <source> -resize '<percentage>' <source>_resized
+$ source: fd .
+$ percentage: printf '10%\n20%\n30%\n40%'

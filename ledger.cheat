@@ -1,9 +1,9 @@
 % ledger
 
 # Print this weeks balance sheet
-ledger -M balance --begin=<begin> --end=<end>
-$ begin: date -d last-monday +%Y-%m-%d
-$ end:   date -d sunday +%Y-%m-%d
+ledger -M balance --begin=<week_begin> --end=<week_end>
+$ week_begin: date -d last-monday +%Y-%m-%d
+$ week_end:   date -d sunday +%Y-%m-%d
 
 # Print this months balance sheet
 ledger -M balance --begin=<begin> --end=<end>

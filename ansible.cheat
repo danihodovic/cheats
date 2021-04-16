@@ -1,0 +1,4 @@
+% ansible
+
+# list all ansible nodes/hosts in the inventory
+ansible-inventory -i devops/environments/staging --graph

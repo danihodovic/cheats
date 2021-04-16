@@ -9,3 +9,7 @@ $ degrees: printf '90\n180\n270'
 convert <source> -resize '<percentage>' <source>_resized
 $ source: fd .
 $ percentage: printf '10%\n20%\n30%\n40%'
+
+# Convert png to pdf
+convert <source_png> $(basename <source_png> .png).pdf
+$ source_png: fd '.*.png'

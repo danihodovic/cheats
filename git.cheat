@@ -5,6 +5,12 @@ git fetch origin
 git checkout master
 git merge origin/master
 
-
 # git log short format
 git log --pretty=format:"%h%x09%an%x09%ad%x09%s"
+
+# copy latest commit sha1
+git rev-parse --short HEAD | tr -d '\n' | xc
+
+# reset a git file to master branch
+git reset origin/master -- <file>
+$ file: git diff origin/master --name-only

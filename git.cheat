@@ -14,3 +14,7 @@ git rev-parse --short HEAD | tr -d '\n' | xc
 # reset a git file to master branch
 git reset origin/master -- <file>
 $ file: git diff origin/master --name-only
+
+# show the diff of a git commit
+git show <commit>
+$ commit: git oneline --- --column 1 --delimiter '\s\s+'

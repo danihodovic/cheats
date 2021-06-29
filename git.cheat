@@ -18,3 +18,7 @@ $ file: git diff origin/master --name-only
 # show the diff of a git commit
 git show <commit>
 $ commit: git oneline --- --column 1 --delimiter '\s\s+'
+
+# check if a file is checked in / track in git
+git ls-files --error-unmatch <file>
+$ file: fd . -uu --exclude=.venv --exclude=.mypy_cache --exclude=.git

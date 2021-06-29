@@ -12,3 +12,13 @@ $ bundle_file: locate antibody.txt
 
 # Fd find ignored files and directories
 fd -uu <search_term> <path>
+
+# Change timezone
+sudo timedatectl set-timezone <timezone>
+$ timezone: timedatectl list-timezones
+
+# Echo eof to file
+cat <<EOF >>file.sh
+#!/bin/sh
+# Created on $(date)
+EOF

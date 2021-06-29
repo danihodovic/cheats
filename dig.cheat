@@ -2,3 +2,8 @@
 
 # Lookup SRV record
 dig +short drone-github-web.service.consul SRV
+
+# Lookup record using specific name server
+dig @<name_server> +short NS <domain>
+$ name_server: ashton.ns.cloudflare.com
+$ domain: domain.com

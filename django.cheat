@@ -12,3 +12,9 @@ $ model:
 # Reset model migrations to zero
 ./manage.py migrate <app> zero
 $ app: ./manage.py list_apps
+
+# Print / list all django urls
+./manage.py show_urls
+
+# Create a new management command
+./manage.py create_command <app>

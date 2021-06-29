@@ -1,0 +1,4 @@
+% docker
+
+# Remove all running containers
+docker rm $(docker ps --filter status=running -q) -f

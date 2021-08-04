@@ -22,3 +22,9 @@ cat <<EOF >>file.sh
 #!/bin/sh
 # Created on $(date)
 EOF
+
+# Find all executable files
+fd --type=x
+
+# Generate a new SSH key
+ssh-keygen -t rsa

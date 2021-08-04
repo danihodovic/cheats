@@ -17,4 +17,8 @@ $ app: ./manage.py list_apps
 ./manage.py show_urls
 
 # Create a new management command
-./manage.py create_command <app>
+./manage.py create_management_command
+
+# list and run management command
+./manage.py <command>
+$ command: ./manage.py list_commands --no-fzf --- --column 1 --delimiter '\s\s+'

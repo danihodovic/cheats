@@ -22,3 +22,6 @@ $ commit: git oneline --- --column 1 --delimiter '\s\s+'
 # check if a file is checked in / track in git
 git ls-files --error-unmatch <file>
 $ file: fd . -uu --exclude=.venv --exclude=.mypy_cache --exclude=.git
+
+# copy the git branch to the clipboard
+git branch --show-current | tr -d '\n' | xclip -selection clipboard

@@ -1,0 +1,34 @@
+% kubectl
+
+# Change the kubectl k8s namespace
+kubectl config set-context --current --namespace=<namespace>
+$ namespace: kubectl get namespace --- --column 1 --header-lines 1 --delimiter '\s\s+'
+
+# Port forward kubectl proxy
+kubectl port-forward service/<service> 80:80
+$ service: kubectl get svc --- --column 1 --header-lines 1 --delimiter '\s\s+'
+
+# Show kubernetes logs for pods matching a service
+kail --svc depode/metabase --since 1h
+
+# Show kubernetes logs for pods in a namespace
+kail --ns=kube-system --since 1h
+
+# Describe a specific kubernetes pod
+kubectl describe po <pod>
+$ pod: kubectl get po --- --column 1 --header-lines 1 --delimiter '\s\s+'
+
+# Start the kubernetes web ui proxy dashboard
+kubectl proxy
+
+# List ingresses in all kubernetes kubectl namespaces
+kubectl get ingress --all-namespaces
+
+# Show node CPU and memory usage with kubectl top
+watch -n 1 'kubectl top node'
+
+# Enter a bash shell inside a container kubectl kubernetes exec
+kubectl exec -it <pod> -- bash
+
+# List all kubernetes k8s namespaces
+kubectl get namespace

@@ -24,7 +24,7 @@ kubectl proxy
 # List ingresses in all kubernetes kubectl namespaces
 kubectl get ingress --all-namespaces
 
-# Show node CPU and memory usage with kubectl top
+# Show node CPU and memory usage with kubectl top in kubernetes
 watch -n 1 'kubectl top node'
 
 # Enter a bash shell inside a container kubectl kubernetes exec
@@ -32,3 +32,13 @@ kubectl exec -it <pod> -- bash
 
 # List all kubernetes k8s namespaces
 kubectl get namespace
+
+# Get kubernetes secret contents and data
+k get secret htpasswd -o jsonpath='{.data}'
+$ secret: get get secret --- --column 1 --header-lines 1 --delimiter '\s\s+'
+
+# Run a container interactively in kubernetes
+kubectl run -i --tty busybox --image=busybox --restart=Never -- sh
+
+# Rollout restart a pod deployment
+kubectl rollout restart deployment/hodovich

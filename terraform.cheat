@@ -1,0 +1,6 @@
+% terraform
+
+# Force taint and replace a particular resource
+terraform plan -out=out.tfplan -replace="<resource>"
+$ resource: terraform state list --- --header-lines 1
+

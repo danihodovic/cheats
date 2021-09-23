@@ -1,0 +1,4 @@
+% dust
+
+# Show size of files and directories. duf, dust, du-sh
+dust --ignore_hidden

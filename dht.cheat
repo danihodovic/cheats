@@ -1,0 +1,4 @@
+% dht
+
+# Kill process on port
+sudo dht kill-process -p <port>

@@ -25,3 +25,7 @@ $ file: fd . -uu --exclude=.venv --exclude=.mypy_cache --exclude=.git
 
 # copy the git branch to the clipboard
 git branch --show-current | tr -d '\n' | xclip -selection clipboard
+
+# diff file from origin/master
+git diff origin/master -- <file_diff_master>
+$ file_diff_master: git diff --name-only origin/master

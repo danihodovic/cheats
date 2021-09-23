@@ -1,0 +1,4 @@
+% pdf
+
+# Cut out a page from a pdf into a new pdf
+pdftk medical_invoices_broken_ankle.pdf cat 2-3 output ankle_invoice_1.pdf

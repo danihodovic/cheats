@@ -7,6 +7,5 @@ PYTHON_CONFIGURE_OPTS=--enable-shared pyenv install <cpython_version>
 $ cpython_version: pyenv install --list | rg '^\s*\d.*'
 
 # Set a local pyenv version
-PYTHON_CONFIGURE_OPTS=--enable-shared pyenv install <cpython_version> && \
 pyenv local <cpython_version>
 $ cpython_version: pyenv install --list | rg '^\s*\d.*'

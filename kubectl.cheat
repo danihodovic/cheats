@@ -53,3 +53,6 @@ $ krew-plugin: kubectl krew search --- --column 1 --header-lines 1 --delimiter '
 
 # Sniff on pod traffic using kubectl
 kubectl sniff <pod> -f "port 80" -o - | tshark -r -
+
+# Run kubectl popeye to get a cluster score
+kubectl popeye

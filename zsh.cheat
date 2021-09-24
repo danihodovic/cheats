@@ -4,9 +4,13 @@ rm ~/{.zcompdump,.zcompdump_custom} && zsh -c compinit
 
 % zsh, antibody
 
+$ bundle_file: locate antibody.txt
+
 # Update antibody bundle
 antibody bundle < <bundle_file>
-$ bundle_file: locate antibody.txt
+
+# Add antibody bundle
+nvim <bundle_file> && antibody bundle < <bundle_file>
 
 % fd, zsh, find
 
@@ -28,3 +32,7 @@ fd --type=x
 
 # Generate a new SSH key
 ssh-keygen -t rsa
+
+% locate
+# Update locate locatedb
+sudo updatedb

@@ -42,3 +42,14 @@ kubectl run -i --tty busybox --image=busybox --restart=Never -- sh
 
 # Rollout restart a pod deployment
 kubectl rollout restart deployment/hodovich
+
+# Run a ssh shell on a kubernetes node
+kubectl node-shell <node>
+$ node: kubectl get node --- --column 1 --header-lines 1 --delimiter '\s\s+'
+
+# Install a kubectl krew plugin
+kubectl krew install <krew-plugin>
+$ krew-plugin: kubectl krew search --- --column 1 --header-lines 1 --delimiter '\s\s+'
+
+# Sniff on pod traffic using kubectl
+kubectl sniff <pod> -f "port 80" -o - | tshark -r -

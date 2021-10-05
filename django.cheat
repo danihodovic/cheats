@@ -17,6 +17,10 @@ $ app: ./manage.py list_apps
 ./manage.py migrate <app> <migration>
 $ migration: ./manage.py showmigrations <app> --- --column 3 --delimiter '\s'
 
+# Remove migration files
+rm <migration_files>
+$ migration_files: fd '\d{4}_.*.py' --- --multi --expand
+
 # Print / list all django urls
 ./manage.py show_urls
 

@@ -1,0 +1,12 @@
+% gsutil, google cloud, gcloud
+
+$ bucket: gsutil ls
+
+# Copy a file to a gcs bucket
+gsutil cp file <bucket>location
+
+# Copy a folder to gcs bucket
+gsutil -m rsync -d -r my_folder <bucket>location
+
+# Remove recursively from gsbucket
+gsutil -m rm -r <bucket>location

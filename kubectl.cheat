@@ -8,12 +8,6 @@ $ namespace: kubectl get namespace --- --column 1 --header-lines 1 --delimiter '
 kubectl port-forward service/<service> 80:80
 $ service: kubectl get svc --- --column 1 --header-lines 1 --delimiter '\s\s+'
 
-# Show kubernetes logs for pods matching a service
-kail --svc depode/metabase --since 1h
-
-# Show kubernetes logs for pods in a namespace
-kail --ns=kube-system --since 1h
-
 # Describe a specific kubernetes pod
 kubectl describe po <pod>
 $ pod: kubectl get po --- --column 1 --header-lines 1 --delimiter '\s\s+'
@@ -56,3 +50,12 @@ kubectl sniff <pod> -f "port 80" -o - | tshark -r -
 
 # Run kubectl popeye to get a cluster score
 kubectl popeye
+
+# Show kubernetes logs for pods matching a service
+kail --svc depode/metabase --since 1h
+
+# Show kubernetes logs for pods in a namespace
+kail --ns=kube-system --since 1h
+
+# Show kubernetes logs for pods in a deployment
+kail --deployment=mypod --since 1h

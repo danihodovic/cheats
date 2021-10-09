@@ -9,3 +9,6 @@ $ systemd_services: systemctl list-units --type=service --- --column 2 --delimit
 
 # flush systemd-resolved cache
 sudo systemd-resolve --flush-caches
+
+# systemd restart network networkmanager
+sudo systemctl restart NetworkManager.service

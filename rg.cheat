@@ -1,7 +1,7 @@
 % rg
 
 # Grep / search for occurances in specific file type
-$ rg 'ohif/ui' --glob '*.json'
+rg 'ohif/ui' --glob '*.json'
 
 # Only list the file name
-$ rg 'ohif/ui' -l
+rg 'ohif/ui' -l

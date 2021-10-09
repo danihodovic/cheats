@@ -1,0 +1,5 @@
+% sops
+
+# Edit a sops file
+$ secrets_file: rg 'sops:' -l
+sops <secrets_file>

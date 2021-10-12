@@ -39,3 +39,6 @@ $ commit: git log --color=always --pretty=oneline --abbrev-commit --- --tac +s -
 
 # git remove untracked files, warning: destructive operation
 git clean -f -d
+
+# git search for text in the commit log. grep
+git log --all --grep='Build 0051'

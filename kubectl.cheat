@@ -58,4 +58,4 @@ kail --svc depode/metabase --since 1h
 kail --ns=kube-system --since 1h
 
 # Show kubernetes logs for pods in a deployment
-kail --deployment=mypod --since 1h
+kail --deploy=mypod --since 1h

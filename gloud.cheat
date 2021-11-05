@@ -1,0 +1,7 @@
+% gcloud
+
+$ database_instance: gcloud sql instances list --- --column 1 --delimiter '\s\s+'
+
+# Connect to a sql database db
+gcloud sql connect <database_instance> --user=new_lantern --quiet
+

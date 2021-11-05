@@ -1,0 +1,4 @@
+% ssh
+
+# Set up an ssh tunnel to a server
+ssh -N -L 8443:localhost:8443 web-staging

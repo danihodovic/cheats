@@ -5,4 +5,4 @@ $ secrets_file: rg 'sops:' -l
 sops <secrets_file>
 
 # Output / dump sops secrets to a file
-$ sops --decrypt --output-type=json <secrets_file> > .secrets.json
+sops --decrypt --output-type=json <secrets_file> > .secrets.json

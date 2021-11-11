@@ -1,7 +1,9 @@
 % sops
 
+$ git_root: git rev-parse --show-toplevel
+$ secrets_file: rg 'sops"?:' -l <git_root>
+
 # Edit a sops file
-$ secrets_file: rg 'sops:' -l
 sops <secrets_file>
 
 # Output / dump sops secrets to a file

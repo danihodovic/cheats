@@ -1,5 +1,8 @@
 % kubectl
 
+$ namespace: kubectl get namespace --- --column 1 --header-lines 1 --delimiter '\s\s+'
+$ deployment: kubectl get deployment --- --column 1 --header-lines 1 --delimiter '\s\s+'
+
 # Change the kubectl k8s namespace
 kubectl config set-context --current --namespace=<namespace>
 $ namespace: kubectl get namespace --- --column 1 --header-lines 1 --delimiter '\s\s+'
@@ -51,11 +54,13 @@ kubectl sniff <pod> -f "port 80" -o - | tshark -r -
 # Run kubectl popeye to get a cluster score
 kubectl popeye
 
-# Show kubernetes logs for pods matching a service
-kail --svc depode/metabase --since 1h
+# Delete all resource in a namespace
+kubectl delete all --all --namespace <namespace>
 
-# Show kubernetes logs for pods in a namespace
-kail --ns=kube-system --since 1h
+# Get pods sorted by node
+kubectl get pods -o wide --sort-by="{.spec.nodeName}"
 
-# Show kubernetes logs for pods in a deployment
-kail --deploy=mypod --since 1h
+# Open the kube traefik dashboard
+$ traefik_namespace: kubectl get pod --all-namespaces | rg '\straefik' --- --column 1 --delimiter '\s\s+'
+$ traefik_pod: kubectl get pod --all-namespaces | rg '\straefik' --- --column 2 --delimiter '\s\s+'
+kubectl port-forward <traefik_pod> -n <traefik_namespace> 9000:9000

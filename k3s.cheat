@@ -1,0 +1,7 @@
+% k3s
+
+# Install a k3s server and merge local kubeconfig to local file
+k3sup install --host 34.123.57.110 --user deployer --ssh-key ~/.ssh/newlantern --local-path $HOME/.kube/config --context newlantern-staging --merge
+
+# Join a k3s agent / worker to a k3s server cluster
+k3sup join --ip $AGENT_IP --server-ip $SERVER_IP --user $USER

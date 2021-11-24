@@ -1,4 +1,9 @@
 % ansible
 
+$ vault_file: rg '\$ANSIBLE_VAULT' -l
+
 # list all ansible nodes/hosts in the inventory
 ansible-inventory -i devops/environments/staging --graph
+
+# view ansible vault secrets of file
+ansible-vault view <vault_file> | nvim

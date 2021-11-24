@@ -2,6 +2,7 @@
 
 $ database_instance: gcloud sql instances list --- --column 1 --delimiter '\s\s+'
 $ service_account: gcloud iam service-accounts list --- --column 2 --delimiter '\s\s+'
+$ instance: gcloud compute instances list --- --column 5 --delimiter '\s\s+'
 
 # Connect to a sql database db
 gcloud sql connect <database_instance> --user=new_lantern --quiet
@@ -9,3 +10,12 @@ gcloud sql connect <database_instance> --user=new_lantern --quiet
 # Create service account key for iam account
 gcloud iam service-accounts keys create key-file --iam-account=<service_account>
 echo You can find it in $PWD/key-file
+
+# List gcloud servers instances
+gcloud compute instances list
+
+# SSH into a gcloud instance
+ssh user@<instance>
+
+# List gcloud static ip addresses
+gcloud compute addresses list

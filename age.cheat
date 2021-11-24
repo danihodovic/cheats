@@ -1,0 +1,6 @@
+% age
+
+# Create a new age keypair
+$ age-keygen
+
+# Create a new age keypair for sops and insert it into the sops file

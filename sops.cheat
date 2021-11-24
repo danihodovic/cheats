@@ -2,9 +2,17 @@
 
 $ git_root: git rev-parse --show-toplevel
 $ secrets_file: rg 'sops"?:' -l <git_root>
+$ gcp_keyring: gcloud kms keys list --location global --keyring sops --- --column 1 --delimiter '\s\s+'
+$ age_public_key: cat ~/.config/sops/age/keys.txt --- --column 3 --delimiter '\s\s+'
 
 # Edit a sops file
 sops <secrets_file>
 
 # Output / dump sops secrets to a file
 sops --decrypt --output-type=json <secrets_file> > .secrets.json
+
+# Encrypt a new file using gcp kms
+$EDITOR $file && sops --encrypt --gcp-kms <gcp_keyring> $file > secret.enc.yaml
+
+# Encrypt a new file using age
+$EDITOR $file && sops --encrypt --age <age_public_key> $file > secret.enc.yaml

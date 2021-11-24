@@ -1,4 +1,4 @@
 % tanka
 
 # tanka eval
-$ tk eval environments/default -e app.deployment.spec
+tk eval environments/default -e app.deployment.spec

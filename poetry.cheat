@@ -1,0 +1,4 @@
+% poetry
+
+# Poetry add git dependency
+poetry add git+https://github.com/sdispater/pendulum.git#develop

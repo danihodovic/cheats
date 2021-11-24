@@ -1,0 +1,4 @@
+% unix
+
+# Watch subshells spawned by a shell
+watch pstree -halp 40931

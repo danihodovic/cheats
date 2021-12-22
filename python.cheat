@@ -1,5 +1,3 @@
-% python
-
 % python, pyenv
 
 # Install a python version
@@ -9,3 +7,9 @@ $ cpython_version: pyenv install --list | rg '^\s*\d.*'
 # Set a local pyenv version
 pyenv local <cpython_version>
 $ cpython_version: pyenv install --list | rg '^\s*\d.*'
+
+# Show installed python versions by pyenv
+\ls -A -1 ~/.pyenv/versions
+
+# Generate a .pylintrc file
+pylint --generate-rcfile > .pylintrc

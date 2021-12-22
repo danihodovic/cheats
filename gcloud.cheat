@@ -6,6 +6,7 @@ $ instance: gcloud compute instances list --- --column 5 --delimiter '\s\s+'
 $ project: gcloud projects list --- --column 1 --delimiter '\s\s+'
 $ region: gcloud compute regions list --- --column 1 --delimiter '\s\s+'
 $ zone: gcloud compute zones list --- --column 1 --delimiter '\s\s+'
+$ cluster: gcloud container clusters list --- --column 1 --delimiter '\s\s+'
 
 # Connect to a sql database db
 gcloud sql connect <database_instance> --user=new_lantern --quiet
@@ -31,3 +32,6 @@ gcloud config set compute/region <region>
 
 # Set or change gcloud config zone
 gcloud config set compute/zone <zone>
+
+# Get kubectl cluster credentials for gcp gcloud
+gcloud container clusters get-credentials <cluster>

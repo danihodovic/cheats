@@ -2,3 +2,6 @@
 
 # Set up an ssh tunnel to a server
 ssh -N -L 8443:localhost:8443 web-staging
+
+# Generate a new ssh key
+ssh-keygen -t ed25519 -C "your_email@example.com"

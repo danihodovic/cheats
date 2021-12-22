@@ -1,5 +1,7 @@
 % git
 
+$ file_tracked_by_git: git ls-tree -r master --name-only
+
 # Bring a Github fork up to date
 git fetch origin
 git checkout master
@@ -33,6 +35,9 @@ $ file_diff_master: git diff --name-only origin/master
 # get the short git sha1 commit hash
 git rev-parse --short HEAD
 
+# get the long git sha1 commit hash
+git rev-parse HEAD
+
 # git format patch create git patch files
 git format-patch $(echo <commit> | sed "s/ .*//")
 $ commit: git log --color=always --pretty=oneline --abbrev-commit --- --tac +s -m -e --ansi --reverse
@@ -42,3 +47,6 @@ git clean -f -d
 
 # git search for text in the commit log. grep
 git log --all --grep='Build 0051'
+
+# show all commits that touched / changes a git file
+git log --follow -- <file_tracked_by_git>

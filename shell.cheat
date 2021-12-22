@@ -1,0 +1,7 @@
+% bash
+
+# Diff two files and show special characters
+diff file1 file2 | cat -t
+
+# Diff two files side by side
+diff file1 file2 | cat -t

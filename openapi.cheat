@@ -1,0 +1,4 @@
+% openapi, swagger
+
+# Generate an API client
+dht generate-openapi-client https://raw.githubusercontent.com/OpenAPITools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml

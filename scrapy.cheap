@@ -1,0 +1,4 @@
+% scrapy
+
+# Run a specific spider
+scrapy crawl quotes

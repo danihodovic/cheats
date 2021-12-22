@@ -1,0 +1,4 @@
+% hcloud, hetzner
+
+# List hcloud servers
+hcloud server list

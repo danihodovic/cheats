@@ -1,0 +1,4 @@
+% airflow
+
+# Run airflow locally for development standalone
+AIRFLOW_HOME=$PWD/airflow airflow standalone

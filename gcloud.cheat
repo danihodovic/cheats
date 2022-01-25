@@ -1,8 +1,10 @@
 % gcloud
 
+$ account: gcloud auth list | grep '@'
 $ database_instance: gcloud sql instances list --- --column 1 --delimiter '\s\s+'
 $ service_account: gcloud iam service-accounts list --- --column 2 --delimiter '\s\s+'
 $ instance: gcloud compute instances list --- --column 5 --delimiter '\s\s+'
+$ database_instance: gcloud sql instances list --- --column 1 --delimiter '\s\s+'
 $ project: gcloud projects list --- --column 1 --delimiter '\s\s+'
 $ region: gcloud compute regions list --- --column 1 --delimiter '\s\s+'
 $ zone: gcloud compute zones list --- --column 1 --delimiter '\s\s+'
@@ -35,3 +37,12 @@ gcloud config set compute/zone <zone>
 
 # Get kubectl cluster credentials for gcp gcloud
 gcloud container clusters get-credentials <cluster>
+
+# List google cloud database servers
+gcloud sql instances list
+
+# List google cloud databases for a server
+gcloud sql databases list --instance <database_instance>
+
+# Change the gcloud account
+gcloud config set account <account>

@@ -1,0 +1,4 @@
+% openssl, ssh
+
+# Decrypt a private ssh key file
+openssl rsa -in ~/.ssh/id_rsa

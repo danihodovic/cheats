@@ -13,3 +13,6 @@ terraform plan -target='<resource>'
 
 # Terraform list resources
 echo <resource>
+
+# Terraform unlock state
+terraform force-unlock 123xyz -force

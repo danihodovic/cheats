@@ -2,3 +2,9 @@
 
 # Poetry add git dependency
 poetry add git+https://github.com/sdispater/pendulum.git#develop
+
+# Show where a dependency comes from
+poetry show --tree | rg cryptography -C 5
+
+$ Clear the cache
+poetry cache clear pypi --all

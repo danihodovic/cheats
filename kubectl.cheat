@@ -27,6 +27,9 @@ watch -n 1 'kubectl top node'
 # Enter a bash shell inside a container kubectl kubernetes exec
 kubectl exec -it <pod> -- bash
 
+# Enter a django shell inside a container kubectl kubernetes exec
+kubectl exec -it <pod> -- ./manage.py shell_plus
+
 # List all kubernetes k8s namespaces
 kubectl get namespace
 

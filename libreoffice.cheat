@@ -1,0 +1,4 @@
+% libreoffice, excel
+
+# Convert xls excel to csv file
+libreoffice --headless --convert-to csv ~/Downloads/download\(3\).xls

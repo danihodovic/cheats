@@ -44,5 +44,8 @@ gcloud sql instances list
 # List google cloud databases for a server
 gcloud sql databases list --instance <database_instance>
 
-# Change the gcloud account
+# Change the gcloud account and change the gcloud user
 gcloud config set account <account>
+
+# List google storage buckets
+gcloud alpha storage ls

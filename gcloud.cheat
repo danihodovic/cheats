@@ -1,4 +1,4 @@
-% gcloud
+% gcloud, gcp
 
 $ account: gcloud auth list | grep '@'
 $ database_instance: gcloud sql instances list --- --column 1 --delimiter '\s\s+'
@@ -49,3 +49,6 @@ gcloud config set account <account>
 
 # List google storage buckets
 gcloud alpha storage ls
+
+# List google cloud service accounts
+gcloud iam service-accounts list

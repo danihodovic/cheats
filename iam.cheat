@@ -1,0 +1,7 @@
+% aws, iam
+
+$ iam_username: aws iam list-users --output text | awk '{print $NF}'
+
+# Create an access key for a user
+aws iam create-access-key --user-name=<iam_username>
+

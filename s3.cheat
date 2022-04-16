@@ -1,0 +1,7 @@
+% s3
+
+$ bucket: aws s3 ls --- --column 3 --delimiter '\s+'
+
+# Add a local file to an S3 bucket
+aws s3 cp /tmp/foo s3://<bucket>/foo
+

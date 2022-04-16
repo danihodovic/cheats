@@ -1,0 +1,4 @@
+% jb, jsonnet
+
+# Install jsonnet jb dependency from git
+jb install https://github.com/honeylogic-io/utils-libsonnet.git@master

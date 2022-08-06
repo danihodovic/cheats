@@ -15,4 +15,7 @@ terraform plan -target='<resource>'
 echo <resource>
 
 # Terraform unlock state
-terraform force-unlock 123xyz -force
+terraform force-unlock 123xyz
+
+# Terraform remove a resource from state
+terraform state rm <resource>

@@ -1,0 +1,26 @@
+% aws
+
+$ role: aws iam list-users --output json | pyp 'rows = json.loads(stdin.read())["Users"]' 'for entry in rows:' '  print(entry["UserName"])'
+$ instance: aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId, VpcId, PublicIpAddress, Placement.AvailabilityZone, State.Name]' --output text --- --column 1 --delimiter '\t'
+$ instance_ip: aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId, VpcId, PublicIpAddress, Placement.AvailabilityZone, State.Name]' --output text --- --column 3 --delimiter '\t'
+
+# Create an AWS access key IAM
+aws iam create-access-key --user-name <role>
+
+# Describe vpc subnets
+aws ec2 describe-subnets
+
+# List all Ubuntu AMIs
+aws ec2 describe-images --filters 'Name=name,Values=ubuntu/images/hvm-ssd/ubuntu*amd64*' \
+ --query 'Images[*].[ImageId,CreationDate,Name]' --output text | sort -k2
+
+# List EC2 instances
+aws ec2 describe-instances --region=eu-west-1 --query 'Reservations[*].Instances[*].[VpcId, InstanceId, PublicIpAddress, Placement.AvailabilityZone, State.Name]' --output text
+
+# Connect to EC2 instance using ssh-instance-connect. Transfer key to EC2 instance server
+aws ec2-instance-connect send-ssh-public-key --instance-id <instance> --ssh-public-key file:///home/dani/.ssh/id_rsa.pub --instance-os-user ubuntu
+ssh ubuntu@<instance_ip>
+
+# Delete an ec2 instance
+aws ec2 stop-instances --instance-id <instance>
+aws ec2 terminate-instances --instance-id <instance>

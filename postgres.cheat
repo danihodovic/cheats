@@ -1,0 +1,7 @@
+% pg, postgres
+
+# Dump a postgres database
+pg_dump -U wario -h <url> -f ./db_dump -Fd wario
+
+# Restore a postgres database
+pg_restore -d db -h localhost -U postgres ./dbdump

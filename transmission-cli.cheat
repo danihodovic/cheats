@@ -1,0 +1,4 @@
+% transmission, torrents
+
+# Download a magnet link
+transmission-cli -w ~/Torrents 'magnet:?xt'

@@ -50,3 +50,6 @@ git log --all --grep='Build 0051'
 
 # show all commits that touched / changes a git file
 git log --follow -- <file_tracked_by_git>
+
+# show all contributors for a folder or file
+git shortlog -n -s -- config/

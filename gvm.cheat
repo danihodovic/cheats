@@ -1,0 +1,6 @@
+% go, golang, gvm
+
+$ go_version: gvm listall --- --column 2 --delimiter '\s+' --fzf-overrides '--tac'
+
+# Install a golang version
+gvm install <go_version> --prefer-binary

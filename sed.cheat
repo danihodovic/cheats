@@ -1,0 +1,4 @@
+% sed
+
+# Replace all occurances of a word in a folder
+find . -type f -name "*.txt" -print0 | xargs -0 sed -i "s/foo/bar/g"

@@ -1,0 +1,5 @@
+% rsync
+
+# Copy files recursively between two local direcories
+rsync -avzh source dest
+

@@ -1,10 +1,10 @@
 % pg, postgres
 
 # Dump a postgres database into a single tarfile
-pg_dump dbname -U wario -h some_url -Ft  --exclude-table=django_site  > ./db_dump.tar
+pg_dump dbname -U wario -h some_url -Ft  --exclude-table=django_site --no-privileges > ./db_dump.tar
 
 # Restore a postgres database
-pg_restore -d newdb -h localhost -U postgres --disable-triggers ./db_dump.tar
+pg_restore -d newdb -h localhost -U postgres --disable-triggers --no-privileges ./db_dump.tar
 
 # Watch the progress of a Postgres dump
 watch -n 0.3 du -sh db_dump.tar

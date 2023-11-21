@@ -1,0 +1,7 @@
+% pip, pypi
+
+# Install a pip package from a private repo
+pip install -i http://127.0.0.1:8000/pypi <your favorite package>
+
+# Show a pip dependency tree
+pipdeptree

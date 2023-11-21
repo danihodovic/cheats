@@ -1,0 +1,25 @@
+% flatpak
+
+$ flatpakref: fd .flatpakref
+$ flatpak_app: flatpak list --app --- --column 2 --delimiter '\s+'
+
+# Install a flatpakref file
+flatpak install <flatpakref>
+
+# List flatpak remotes
+flatpak remotes
+
+# Add flatpak remote
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# Search flatpak
+flatpak search gimp
+
+# Install from flatpak
+flatpak install flathub org.gimp.GIMP
+
+# Update all flatpak applications
+flatpak update
+
+# Run a flatpak application
+flatpak run <flatpak_app>

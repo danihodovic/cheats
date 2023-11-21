@@ -1,0 +1,4 @@
+% celery
+
+# Purge all Celery tasks
+celery --app config.celery_app:app control revoke

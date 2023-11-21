@@ -60,3 +60,6 @@ git shortlog -n -s -- config/
 
 # show the history for a file
 git log -p -- <file_tracked_by_git>
+
+# Git rebase to the first root commit
+git rebase --root -i

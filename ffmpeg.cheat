@@ -1,0 +1,4 @@
+% ffmpeg, audio
+
+# Make an audio file shorter by cutting it between two timestamps
+ffmpeg -i file.mkv -ss 00:00:20 -to 00:00:40 -c copy file-2.mkv

@@ -1,0 +1,7 @@
+% task, taskwarrior
+
+# List all tasks that have not been completed
+task -COMPLETED limit:none
+
+# Debug the taskwarrior stop hook
+{ t 35 export rc.json.array=off & t 35 export rc.json.array=off } | python taskwarrior_cli.py timewarrior-hook

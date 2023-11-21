@@ -7,8 +7,8 @@ systemctl list-units --type=service
 sudo journalctl -u <systemd_services>
 $ systemd_services: systemctl list-units --type=service --- --column 2 --delimiter '\s\s+'
 
-# flush systemd-resolved cache
-sudo systemd-resolve --flush-caches
+# flush systemd DNS cache
+sudo resolvectl flush-caches
 
 # systemd restart network networkmanager
 sudo systemctl restart NetworkManager.service

@@ -67,3 +67,9 @@ kubectl get pods -o wide --sort-by="{.spec.nodeName}"
 $ traefik_namespace: kubectl get pod --all-namespaces | rg '\straefik' --- --column 1 --delimiter '\s\s+'
 $ traefik_pod: kubectl get pod --all-namespaces | rg '\straefik' --- --column 2 --delimiter '\s\s+'
 kubectl port-forward <traefik_pod> -n <traefik_namespace> 9000:9000
+
+# Remove the bind for a persistent volume
+kubectl patch pv postgres -p '{"spec":{"claimRef": null}}'
+
+# Copy a file or directory
+kubectl cp --retries=5 <pod>:/app/data.json.gz data.json.gz

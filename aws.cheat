@@ -24,3 +24,9 @@ ssh ubuntu@<instance_ip>
 # Delete an ec2 instance
 aws ec2 stop-instances --instance-id <instance>
 aws ec2 terminate-instances --instance-id <instance>
+
+# Get AWS account ID
+aws sts get-caller-identity
+
+# List IAM users
+aws iam list-users

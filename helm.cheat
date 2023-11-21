@@ -1,0 +1,12 @@
+% helm
+
+$ release: helm ls --all --all-namespaces --- --column 1 --header-lines 1 --delimiter '\s\s+'
+
+# List all releases in all namespaces
+helm ls --all --all-namespaces
+
+# Uninstall helm release
+helm uninstall <release>
+
+# Show the status of a release
+helm status <release>

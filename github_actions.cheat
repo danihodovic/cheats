@@ -1,0 +1,6 @@
+% github actions
+
+$ job: act --list --- --column 2 --delimiter '\s\s+' --header-lines 1
+
+# Run a Github Action locally
+act --job <job>

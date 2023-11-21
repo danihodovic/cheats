@@ -2,3 +2,9 @@
 
 # List hcloud servers
 hcloud server list
+
+# List hcloud data centers
+hcloud datacenter list
+
+# List hcloud volumes
+hcloud volume list

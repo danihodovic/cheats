@@ -1,0 +1,10 @@
+% vpn, wireguard
+
+# Start the algo vpn
+sudo systemctl start wg-quick@wg0
+
+# Stop the algo vpn
+sudo systemctl status wg-quick@wg0
+
+# Check VPN status in Firefox
+firefox https://whoer.net/

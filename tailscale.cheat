@@ -1,0 +1,9 @@
+% tailscale
+
+$ server: sudo tailscale status | grep "offers exit node" --- --column 1 --delimiter '\s\s+'
+
+# Disable traffic through an exit node
+sudo tailscale up --exit-node=
+
+# Enable traffic through an exit node
+sudo tailscale up --exit-node=<server>

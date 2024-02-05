@@ -4,6 +4,9 @@ $ role: aws iam list-users --output json | pyp 'rows = json.loads(stdin.read())[
 $ instance: aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId, VpcId, PublicIpAddress, Placement.AvailabilityZone, State.Name]' --output text --- --column 1 --delimiter '\t'
 $ instance_ip: aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId, VpcId, PublicIpAddress, Placement.AvailabilityZone, State.Name]' --output text --- --column 3 --delimiter '\t'
 
+$ ecs_cluster: aws ecs list-clusters --output text --- --delimiter '\s+' --column 2
+$ ecs_tasks: aws ecs list-tasks --cluster <ecs_cluster> --output text
+
 # Create an AWS access key IAM
 aws iam create-access-key --user-name <role>
 
@@ -30,3 +33,18 @@ aws sts get-caller-identity
 
 # List IAM users
 aws iam list-users
+
+# Log in to AWS ECR
+aws ecr get-login-password --region REGION | docker login --username AWS --password-stdin ACCOUNT-ID.dkr.ecr.REGION.amazonaws.com
+
+# List ecs clusters
+echo <ecs_cluster>
+
+# List ecs tasks
+echo <ecs_tasks>
+
+# List ecs container instances
+aws ecs list-container-instances --cluster <ecs_cluster> --output text
+
+# SSH into an ecs container
+$ aws ecs execute-command --cluster <ecs_cluster> --task <ecs_task> --command "/bin/bash" --interactive

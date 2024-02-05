@@ -14,3 +14,6 @@ aws s3 rm 's3://<bucket>/key' --recursive
 
 # Copy an object to stdout
 aws s3 cp s3://<bucket>/<file> -
+
+# Create a pre-signed download url
+aws s3 presign s3://<bucket><file> --expires-in 360 #seconds

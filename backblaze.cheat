@@ -1,0 +1,13 @@
+% backblaze, b2
+
+
+$ bucket: b2 bucket list --- --column 3 --delimiter '\s+'
+
+# list backblaze buckets
+b2 bucket list
+
+# create a b2 bucket
+b2 bucket create name {allPrivate,allPublic}
+
+# list contents of a b2 bucket
+b2 ls b2://<bucket> --recursive

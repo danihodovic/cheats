@@ -11,3 +11,6 @@ b2 bucket create name {allPrivate,allPublic}
 
 # list contents of a b2 bucket
 b2 ls b2://<bucket> --recursive
+
+# list account info / bucket region
+b2 account get

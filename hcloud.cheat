@@ -4,6 +4,8 @@ $ location: 	hcloud location list 	--- --column 2 --delimiter '\s+' --header-lin
 $ ssh_key:  	hcloud ssh-key list 	--- --column 1 --delimiter '\s+' --header-lines 1
 $ server_type:  hcloud server-type list --- --column 2 --delimiter '\s+' --header-lines 1
 $ image:  	hcloud image list 	--- --column 1 --delimiter '\s+' --header-lines 1
+$ server:       hcloud server list 	--- --column 2 --delimiter '\s+' --header-lines 1
+$ server_ip:    hcloud server list 	--- --column 4 --delimiter '\s+' --header-lines 1
 
 # List hcloud servers
 hcloud server list
@@ -16,3 +18,9 @@ hcloud volume list
 
 # Create hcloud server
 hcloud server create --location=<location> --type=<server_type> --image=<image> --ssh-key=<ssh_key> --name=<server_name>
+
+# ssh into a hcloud server
+ssh <server_ip>
+
+# delete hcloud server
+hcloud server delete <server>

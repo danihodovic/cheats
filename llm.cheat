@@ -1,0 +1,12 @@
+% llm
+
+$ model: llm models list --- --column 2 --delimiter ':'
+
+# Set default llm model
+llm models default <model>
+
+# Install Mistral API models
+llm install llm-mistral
+
+# List LLM models on install
+echo https://llm.datasette.io/en/stable/plugins/directory.html#remote-apis

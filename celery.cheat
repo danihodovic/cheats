@@ -2,3 +2,6 @@
 
 # Purge all Celery tasks
 celery --app config.celery_app:app control revoke
+
+# List all Celery tasks
+celery --app config.settings.celery:app inspect registered

@@ -3,8 +3,16 @@
 $ app: 		ssh dokku@$DOKKU_HOST apps --- --header-lines 1
 $ postgres:  	ssh dokku@$DOKKU_HOST postgres:list --- --header-lines 1
 
+# Install Dokku
+export DOKKU_TAG=v0.34.5
+wget -NP . https://dokku.com/install/$DOKKU_TAG/bootstrap.sh
+sudo bash bootstrap.sh
+
 # Add an SSH key to dokku (must be done on the remote host)
-cat ~/.ssh/authorized_keys | dokku ssh-keys:add admin
+cat ~/.ssh/authorized_keys | sudo dokku ssh-keys:add admin
+
+# Create a dokku app
+ssh dokku@$DOKKU_HOST apps:create ruby-getting-started
 
 # List dokku apps
 ssh dokku@$DOKKU_HOST apps
@@ -15,6 +23,9 @@ ssh dokku@$DOKKU_HOST builder:set <app> build-dir my_subdirectory
 # Add a domain to an app
 ssh dokku@$DOKKU_HOST domains:add <app> app.com
 
+# Set a domain for an app
+ssh dokku@$DOKKU_HOST domains:set <app> app.com
+
 # Set environment variables
 ssh dokku@$DOKKU_HOST config:set <app> KEY1=VALUE1 KEY2=VALUE2
 
@@ -22,25 +33,28 @@ ssh dokku@$DOKKU_HOST config:set <app> KEY1=VALUE1 KEY2=VALUE2
 ssh dokku@$DOKKU_HOST config:show <app>
 
 # Enter an app
-dokku enter django-allauth-ui web
+dokku enter <app> web
 
 # Show logs for an app
 ssh dokku@$DOKKU_HOST logs <app> -t -n 100
 
 # Show deployment failure logs for an app
-ssh dokku@$DOKKU_HOST logs logs:failed <app>
+ssh dokku@$DOKKU_HOST logs:failed <app>
 
 # Show the ssl certificate for an app
 ssh dokku@$DOKKU_HOST certs:show node-js-app key > server.key
 
 # Install the lets encrypt plugin
-ssh dokku@$DOKKU_HOST plugin:install https://github.com/dokku/dokku-letsencrypt.git
+sudo dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
 
-# Renew a certificate
+# Install or renew a certificate
 ssh dokku@$DOKKU_HOST letsencrypt:enable <app>
 
-# Obtain a certificate
-ssh dokku@$DOKKU_HOST -t letsencrypt:set <app> email your@email.tld && ssh dokku@$DOKKU_HOST letsencrypt:enable <app>
+# Set the letsencrypt email
+ssh dokku@$DOKKU_HOST -t letsencrypt:set <app> email your@email.tld
+
+# Install the postgres plugin
+sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git postgres
 
 # List postgres services
 ssh dokku@$DOKKU_HOST postgres:list
@@ -52,7 +66,31 @@ ssh dokku@$DOKKU_HOST postgres:create mypostgres
 ssh dokku@$DOKKU_HOST postgres:destroy <postgres>
 
 # Connect to a postgres service (has to be run on the Dokku host!)
-ssh dokku@$DOKKU_HOST postgres:connect <postgres>
+dokku postgres:connect <postgres>
 
 # Link an app to a postgres service
 ssh dokku@$DOKKU_HOST postgres:link <postgres> <app>
+
+# Start nginx
+ssh dokku@$DOKKU_HOST nginx:start
+
+# Remove the default nginx file
+sudo rm /etc/nginx/sites-enabled/default
+
+# Show the nginx access logs
+ssh dokku@$DOKKU_HOST nginx:access-logs <app> -t
+
+# Show the nginx error logs
+ssh dokku@$DOKKU_HOST nginx:error-logs <app> -t
+
+# Enable Django debug logging
+ssh dokku@$DOKKU_HOST config:set <app> DJANGO_DEBUG=True
+
+# Set the deployment git branch
+ssh dokku@$DOKKU_HOST git:set <app> deploy-branch SOME_BRANCH_NAME
+
+# Report on the deployment git info
+ssh dokku@$DOKKU_HOST git:report django-allauth-ui
+
+# Rebuild an app
+ssh dokku@$DOKKU_HOST ps:rebuild django-allauth-ui

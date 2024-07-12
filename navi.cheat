@@ -1,0 +1,4 @@
+% navi
+
+# Edit the navi cheats
+$EDITOR $(navi info cheats-path)/

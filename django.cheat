@@ -1,21 +1,22 @@
 % django
 
+$ command: ./manage.py list_commands --no-fzf --- --column 1 --delimiter '\s\s+'
 $ app: ./manage.py list_apps
+$ username: ./manage.py list_users
+$ model:
+$ migration: ./manage.py showmigrations <app> --- --column 3 --delimiter '\s'
 
 # Change users password
 ./manage.py changepassword <username>
-$ username: ./manage.py list_users
 
 # Generate admin
 ./manage.py admin_generator <app> <model>
-$ model:
 
 # Reset model migrations to zero
 ./manage.py migrate <app> zero
 
 # Reset model migrations to a specific migration
 ./manage.py migrate <app> <migration>
-$ migration: ./manage.py showmigrations <app> --- --column 3 --delimiter '\s'
 
 # Remove migration files
 rm <migration_files>
@@ -29,10 +30,12 @@ $ migration_files: fd '\d{4}_.*.py' --- --multi --expand
 
 # list and run management command
 ./manage.py <command>
-$ command: ./manage.py list_commands --no-fzf --- --column 1 --delimiter '\s\s+'
 
 # Create an empty migrations file
 manage.py makemigrations <app> --name my_migration --empty
 
 # Debug Django queries in shell_plus
 ./manage.py shell_plus --print-sql --print-sql-location --truncate-sql=10000
+
+# Graph Django models
+./manage.py graph_models <app> -o models.png --exclude-columns=created_at --include-models=Organization,User

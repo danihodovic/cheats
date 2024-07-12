@@ -52,6 +52,9 @@ git clean -f -d
 # git search for text in the commit log. grep
 git log --all --grep='Build 0051'
 
+# git search for text in the code changes. grep
+git log -Sword
+
 # show all commits that touched / changes a git file
 git log --follow -- <file_tracked_by_git>
 
@@ -63,3 +66,6 @@ git log -p -- <file_tracked_by_git>
 
 # Git rebase to the first root commit
 git rebase --root -i
+
+# Check out a git file from another branch
+git checkout feature-branch -- path/to/file

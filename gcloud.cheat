@@ -1,14 +1,23 @@
-% gcloud, gcp
+% gcloud, gcp, google
 
 $ account: gcloud auth list | grep '@'
-$ database_instance: gcloud sql instances list --- --column 1 --delimiter '\s\s+'
 $ service_account: gcloud iam service-accounts list --- --column 2 --delimiter '\s\s+'
-$ instance: gcloud compute instances list --- --column 5 --delimiter '\s\s+'
+$ instance: gcloud compute instances list --- --column 1 --delimiter '\s\s+'
+$ instance_ip: gcloud compute instances list --- --column 5 --delimiter '\s\s+'
 $ database_instance: gcloud sql instances list --- --column 1 --delimiter '\s\s+'
-$ project: gcloud projects list --- --column 1 --delimiter '\s\s+'
+$ project: gcloud projects list --- --header-lines 1 --column 1 --delimiter '\s\s+'
 $ region: gcloud compute regions list --- --column 1 --delimiter '\s\s+'
 $ zone: gcloud compute zones list --- --column 1 --delimiter '\s\s+'
 $ cluster: gcloud container clusters list --- --column 1 --delimiter '\s\s+'
+
+# Log in to a new GCP account
+gcloud init
+
+# Log in to Google cloud for use with Terraform. application-default
+gcloud auth application-default login
+
+# List projects
+gcloud projects list
 
 # Connect to a sql database db
 gcloud sql connect <database_instance> --user=new_lantern --quiet
@@ -17,11 +26,11 @@ gcloud sql connect <database_instance> --user=new_lantern --quiet
 gcloud iam service-accounts keys create key-file --iam-account=<service_account>
 echo You can find it in $PWD/key-file
 
-# List gcloud servers instances
+# List GCP server instances
 gcloud compute instances list
 
 # SSH into a gcloud instance
-ssh user@<instance>
+gcloud compute ssh <instance>
 
 # List gcloud static ip addresses
 gcloud compute addresses list
@@ -35,8 +44,8 @@ gcloud config set compute/region <region>
 # Set or change gcloud config zone
 gcloud config set compute/zone <zone>
 
-# Get kubectl cluster credentials for gcp gcloud
-gcloud container clusters get-credentials <cluster>
+# Log in to a kubectl cluster and get credentials
+gcloud container clusters get-credentials <cluster> --zone=
 
 # List google cloud database servers
 gcloud sql instances list
@@ -52,3 +61,30 @@ gcloud alpha storage ls
 
 # List google cloud service accounts
 gcloud iam service-accounts list
+
+# List clusters
+gcloud container clusters list
+
+# List compute zones
+gcloud compute zones list
+
+# List images container images
+gcloud container images list --repository=us-central1-docker.pkg.dev/$project/$registry/$app
+
+# Authenticate / login to a GCP docker registry
+gcloud auth configure-docker us-central1-docker.pkg.dev
+
+# List service account permissions
+gcloud projects get-iam-policy <project>
+
+# List Google SQL tiers / server types
+gcloud sql tiers list
+
+# List load balancers
+gcloud compute forwarding-rules list
+
+# List all roles
+gcloud iam roles list
+
+# List storage roles
+gcloud iam roles list --filter "name ~ roles\/storage\."

@@ -9,6 +9,7 @@ $ project: gcloud projects list --- --header-lines 1 --column 1 --delimiter '\s\
 $ region: gcloud compute regions list --- --column 1 --delimiter '\s\s+'
 $ zone: gcloud compute zones list --- --column 1 --delimiter '\s\s+'
 $ cluster: gcloud container clusters list --- --column 1 --delimiter '\s\s+'
+$ dataset: gcloud healthcare datasets list --- --column 1 --delimiter '\s\s+'
 
 # Log in to a new GCP account
 gcloud init
@@ -88,3 +89,18 @@ gcloud iam roles list
 
 # List storage roles
 gcloud iam roles list --filter "name ~ roles\/storage\."
+
+# List vpc
+gcloud compute networks list
+
+# List vpc subnets
+$ gcloud compute networks subnets list
+
+# List pubsub subscriptions
+gcloud pubsub subscriptions list
+
+# List healthcare datasets
+gcloud healthcare datasets list
+
+# List DICOM stores
+gcloud healthcare dicom-stores list --dataset=<dataset>

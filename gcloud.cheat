@@ -58,7 +58,10 @@ gcloud sql databases list --instance <database_instance>
 gcloud config set account <account>
 
 # List google storage buckets
-gcloud alpha storage ls
+gcloud storage ls
+
+# Create a google storage bucket
+gcloud storage buckets create gs://dani-adhoc
 
 # List google cloud service accounts
 gcloud iam service-accounts list
@@ -76,7 +79,10 @@ gcloud container images list --repository=us-central1-docker.pkg.dev/$project/$r
 gcloud auth configure-docker us-central1-docker.pkg.dev
 
 # List service account permissions
-gcloud projects get-iam-policy <project>
+gcloud projects get-iam-policy <project> \
+--flatten="bindings[].members" \
+--format='table(bindings.role)' \
+--filter="bindings.members:<service_account>"
 
 # List Google SQL tiers / server types
 gcloud sql tiers list
@@ -94,7 +100,7 @@ gcloud iam roles list --filter "name ~ roles\/storage\."
 gcloud compute networks list
 
 # List vpc subnets
-$ gcloud compute networks subnets list
+gcloud compute networks subnets list
 
 # List pubsub subscriptions
 gcloud pubsub subscriptions list
@@ -104,3 +110,12 @@ gcloud healthcare datasets list
 
 # List DICOM stores
 gcloud healthcare dicom-stores list --dataset=<dataset>
+
+# Expore DICOM store to a GCS bucket
+gcloud healthcare dicom-stores export gcs staging-dicom --dataset=staging --gcs-uri-prefix=gs://dani-adhoc
+
+# Import from a GCS bucket to a DICOM store
+gcloud healthcare dicom-stores import gcs staging2-dicom --dataset=staging2 --gcs-uri="gs://dani-adhoc/**.dcm"
+
+# List iam workload identity pools
+gcloud iam workload-identity-pools list --location=global

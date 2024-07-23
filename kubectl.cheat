@@ -2,43 +2,85 @@
 
 $ namespace: kubectl get namespace --- --column 1 --header-lines 1 --delimiter '\s\s+'
 $ deployment: kubectl get deployment --- --column 1 --header-lines 1 --delimiter '\s\s+'
+$ statefulset: kubectl get statefulset --- --column 1 --header-lines 1 --delimiter '\s\s+'
+$ service: kubectl get service --- --column 1 --header-lines 1 --delimiter '\s\s+'
+$ pod: kubectl get po --- --column 1 --header-lines 1 --delimiter '\s\s+'
+$ configmap: kubectl get configmap --- --column 1 --header-lines 1 --delimiter '\s\s+'
+$ secret: kubectl get secret --- --column 1 --header-lines 1 --delimiter '\s\s+'
+$ ingress: kubectl get ingress --- --column 1 --header-lines 1 --delimiter '\s\s+'
+$ node: kubectl get nodes --- --column 1 --header-lines 1 --delimiter '\s\s+'
+
+# List kubernetes resources
+kubectl api-resources
 
 # Change the kubectl k8s namespace
-kubectl config set-context --current --namespace=<namespace>
-$ namespace: kubectl get namespace --- --column 1 --header-lines 1 --delimiter '\s\s+'
+kubens
 
 # Port forward kubectl proxy
 kubectl port-forward service/<service> 80:80
-$ service: kubectl get svc --- --column 1 --header-lines 1 --delimiter '\s\s+'
 
-# Describe a specific kubernetes pod
-kubectl describe po <pod>
-$ pod: kubectl get po --- --column 1 --header-lines 1 --delimiter '\s\s+'
+# Get pods
+vd kubectl get pod
+
+# Get pods in all namespaces
+kubectl get pod -L app.kubernetes.io/name --all-namespaces
+
+# Describe a pod
+vd kubectl describe po <pod>
 
 # Start the kubernetes web ui proxy dashboard
 kubectl proxy
 
-# List ingresses in all kubernetes kubectl namespaces
-kubectl get ingress --all-namespaces
+# List services
+vd kubectl get service
+
+# Describe a service
+vd kubectl describe service <service>
+
+# List endpoints
+vd kubectl get endpoints
+
+# List ingress
+vd kubectl get ingress
+
+# Describe an ingress
+vd kubectl describe ingress <ingress>
 
 # Show node CPU and memory usage with kubectl top in kubernetes
 watch -n 1 'kubectl top node'
 
-# Enter a bash shell inside a container kubectl kubernetes exec
+# Enter a bash shell
 kubectl exec -it <pod> -- bash
 
-# Enter a django shell inside a container kubectl kubernetes exec
+# Enter a django shell
 kubectl exec -it <pod> -- ./manage.py shell_plus
 
 # List all kubernetes k8s namespaces
 kubectl get namespace
 
-# Get kubernetes secret contents and data
-k get secret htpasswd -o jsonpath='{.data}'
-$ secret: get get secret --- --column 1 --header-lines 1 --delimiter '\s\s+'
+# Get configmap
+kubectl get configmap
+
+# Describe configmap
+kubectl describe configmap <configmap>
+
+# Get secrets
+kubectl get secret
+
+# Describe secret
+kubectl describe secret <secret>
+
+# Get secret contents
+kubectl get secret <secret> -o jsonpath='{.data}'
 
 # Run a container interactively in kubernetes
 kubectl run -i --tty busybox --image=busybox --restart=Never -- sh
+
+# List deployments
+vd kubectl get deploy
+
+# Describe a deployment
+vd kubectl describe deploy <deployment>
 
 # Rollout restart a pod deployment
 kubectl rollout restart deployment/hodovich
@@ -61,7 +103,7 @@ kubectl popeye
 kubectl delete all --all --namespace <namespace>
 
 # Get pods sorted by node
-kubectl get pods -o wide --sort-by="{.spec.nodeName}"
+vd kubectl get pods -o wide --sort-by="{.spec.nodeName}"
 
 # Open the kube traefik dashboard
 $ traefik_namespace: kubectl get pod --all-namespaces | rg '\straefik' --- --column 1 --delimiter '\s\s+'
@@ -73,3 +115,21 @@ kubectl patch pv postgres -p '{"spec":{"claimRef": null}}'
 
 # Copy a file or directory
 kubectl cp --retries=5 <pod>:/app/data.json.gz data.json.gz
+
+# List Kubernetes events
+viddy "kubectl get events --sort-by='.lastTimestamp' | tac"
+
+# Output a certificate from a secret to disk
+kubectl get secret <secret> -o jsonpath='{.data.tls\.crt}' | base64 --decode > /tmp/cert.crt
+
+# List nodes
+kubectl get nodes -o wide
+
+# Describe a node
+kubectl describe node <node>
+
+# List statefulsets
+kubectl get statefulset
+
+# Describe statefulset
+vd kubectl describe statefulset <statefulset>

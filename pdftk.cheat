@@ -2,3 +2,9 @@
 
 # Cut out a page from a pdf into a new pdf
 pdftk medical_invoices_broken_ankle.pdf cat 2-3 output ankle_invoice_1.pdf
+
+# Concatenate multiple pdf files into one
+pdftk file1.pdf file2.pdf cat output mergedfile.pdf
+
+# Concatenate multiple jpg files into one pdf
+convert 001.jpg 002.jpg -auto-orient /tmp/merged.pdf

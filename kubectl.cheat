@@ -16,8 +16,11 @@ kubectl api-resources
 # Change the kubectl k8s namespace
 kubens
 
-# Port forward kubectl proxy
+# Port forward kubectl service
 kubectl port-forward service/<service> 80:80
+
+# Port forward kubectl pod
+kubectl port-forward pod/<pod> 80:80
 
 # Get pods
 vd kubectl get pod
@@ -54,6 +57,9 @@ kubectl exec -it <pod> -- bash
 
 # Enter a django shell
 kubectl exec -it <pod> -- ./manage.py shell_plus
+
+# Enter a pgcli shell
+kubectl exec -it <pod> -- ./manage.py pgcli
 
 # List all kubernetes k8s namespaces
 kubectl get namespace
@@ -133,3 +139,6 @@ kubectl get statefulset
 
 # Describe statefulset
 vd kubectl describe statefulset <statefulset>
+
+# Show logs for a pod matching a label
+kubectl logs -l name=nl-backend --tail 100 -f

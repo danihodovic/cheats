@@ -4,10 +4,16 @@
 poetry add git+https://github.com/sdispater/pendulum.git#develop
 
 # Show where a dependency comes from
-poetry show --tree | rg cryptography -C 5
+poetry show django --why --tree
 
 # Clear the poetry cache
-poetry cache clear pypi --all
+poetry cache clear PyPI --all
 
 # Poetry install local tar gz tar.gz
 poetry add ../my-package/dist/my-package-0.1.0.tar.gz
+
+# Poetry show virtualenv info
+poetry env info
+
+# Show poetry config
+poetry config --list

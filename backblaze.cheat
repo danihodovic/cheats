@@ -1,6 +1,5 @@
 % backblaze, b2
 
-
 $ bucket: b2 bucket list --- --column 3 --delimiter '\s+'
 
 # list backblaze buckets
@@ -14,3 +13,6 @@ b2 ls b2://<bucket> --recursive
 
 # list account info / bucket region
 b2 account get
+
+# list bucket objects
+b2 ls b2://<bucket>

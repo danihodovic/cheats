@@ -1,0 +1,14 @@
+% kail, kubectl
+
+$ namespace: kubectl get namespace --- --column 1 --header-lines 1 --delimiter '\s\s+'
+$ deployment: kubectl get deployment --- --column 1 --header-lines 1 --delimiter '\s\s+'
+$ service: kubectl get svc --- --column 1 --header-lines 1 --delimiter '\s\s+'
+
+# Show kubernetes logs for pods in a namespace
+kail --ns=<namespace> --since 1h
+
+# Show kubernetes logs matching label
+kail --since=5m -l app.kubernetes.io/name=
+
+# Show logs for ingress-nginx
+kail -l app.kubernetes.io/name=ingress-nginx --since=1m

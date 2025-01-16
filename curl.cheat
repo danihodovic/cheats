@@ -1,0 +1,4 @@
+% curl
+
+# Check my public IP address
+curl ifconfig.me

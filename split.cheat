@@ -1,0 +1,6 @@
+% split
+
+$ input_file: fd i /tmp $HOME
+
+# Chunk and split a file multiple sections with a newline
+split <input_file> --filter='(echo ""; cat) > /dev/stdout' -l 30

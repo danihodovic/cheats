@@ -1,0 +1,7 @@
+% cookiecutter
+
+# Replay a cookiecutter run with the last applied variables
+cookiecutter --replay ~/repos/nl-ops/cookiecutter-infra/
+
+# Edit cookiecutter replay variables
+nvim $(find ~/.cookiecutter_replay | fzf)

@@ -1,14 +1,18 @@
 % systemd
 
+$ service: systemctl list-units --type=service --- --column 2 --delimiter '\s\s+'
+
 # list systemd services
 systemctl list-units --type=service
 
 # show logs for a systemd service
-sudo journalctl -u <systemd_services>
-$ systemd_services: systemctl list-units --type=service --- --column 2 --delimiter '\s\s+'
+sudo journalctl -u <service>
 
 # flush systemd DNS cache
 sudo resolvectl flush-caches
 
 # systemd restart network networkmanager
 sudo systemctl restart NetworkManager.service
+
+# restart service
+systemctl restart <service>

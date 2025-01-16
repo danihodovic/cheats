@@ -1,0 +1,4 @@
+% duf, disks
+
+# Show disk / filesystem storage and free space
+duf

@@ -1,0 +1,5 @@
+% prometheus
+
+# Get the contents of alertmanager yaml
+
+kubectl get secret alertmanager-kube-prometheus-stack-alertmanager -o jsonpath='{.data}' | jq '.["alertmanager.yaml"]' -r | base64 -d

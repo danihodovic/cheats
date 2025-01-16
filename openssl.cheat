@@ -2,3 +2,6 @@
 
 # Decrypt a private ssh key file
 openssl rsa -in ~/.ssh/id_rsa
+
+# Validate a SSL certificate
+openssl x509 -in /tmp/cert.crt -text -noout

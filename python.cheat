@@ -5,3 +5,6 @@ pylint --generate-rcfile > .pylintrc
 
 # Set up a local virtual environment
 python -m venv .venv && cd .
+
+# Remove all unused imports
+pycln /path/ --all

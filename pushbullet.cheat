@@ -1,0 +1,6 @@
+% pushbullet, pb
+
+$ device: pb list-devices --- --column 1 --delimiter '\. '
+
+# Push a file to a device
+pb push -d <device> -f myfile.pdf

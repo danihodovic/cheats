@@ -2,7 +2,7 @@
 
 $ pull_request: gh pr list --- --column 1 --header-lines 0 --delimiter '\t'
 
-# Create a Github pull-request
+# Create / open a Github pull-request
 gh pr create --fill
 
 # Merge a Github pull-request

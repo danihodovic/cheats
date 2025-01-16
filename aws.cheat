@@ -37,14 +37,8 @@ aws iam list-users
 # Log in to AWS ECR
 aws ecr get-login-password --region REGION | docker login --username AWS --password-stdin ACCOUNT-ID.dkr.ecr.REGION.amazonaws.com
 
-# List ecs clusters
-echo <ecs_cluster>
-
 # List ecs tasks
 echo <ecs_tasks>
-
-# List ecs container instances
-aws ecs list-container-instances --cluster <ecs_cluster> --output text
 
 # SSH into an ecs container
 $ aws ecs execute-command --cluster <ecs_cluster> --task <ecs_task> --command "/bin/bash" --interactive

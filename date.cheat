@@ -1,0 +1,4 @@
+% date
+
+# Show the date in YYYY-MM-DD format
+date +%F

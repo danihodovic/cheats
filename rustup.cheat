@@ -1,0 +1,4 @@
+% rust, rustup
+
+# Upgrade rust version
+rustup update

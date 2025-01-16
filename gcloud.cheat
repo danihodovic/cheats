@@ -10,6 +10,7 @@ $ region: gcloud compute regions list --- --column 1 --delimiter '\s\s+'
 $ zone: gcloud compute zones list --- --column 1 --delimiter '\s\s+'
 $ cluster: gcloud container clusters list --- --column 1 --delimiter '\s\s+'
 $ dataset: gcloud healthcare datasets list --- --column 1 --delimiter '\s\s+'
+$ pubsub_topic: gcloud pubsub topics list --- --column 1 --delimiter '\s\s+'
 
 # Log in to a new GCP account
 gcloud init
@@ -48,13 +49,22 @@ gcloud config set compute/zone <zone>
 # Log in to a kubectl cluster and get credentials
 gcloud container clusters get-credentials <cluster> --zone=
 
+# Describe a GKE cluster
+gcloud container clusters describe <cluster> --zone us-central1
+
+# Get the cluster endpoint
+gcloud container clusters describe <cluster> --format="value(endpoint)" --zone=
+
+# Get the cluster ca certificate
+gcloud container clusters describe <cluster> --format="value(masterAuth.clusterCaCertificate)" --zone=
+
 # List google cloud database servers
-gcloud sql instances list
+gcloud sql instances list --format="table[box](name,settings.dataDiskSizeGb,settings.tier,ipAddresses[0].ipAddress,region)"
 
 # List google cloud databases for a server
 gcloud sql databases list --instance <database_instance>
 
-# Change the gcloud account and change the gcloud user
+# Log in as a different gcloud account/user
 gcloud config set account <account>
 
 # List google storage buckets
@@ -65,6 +75,9 @@ gcloud storage buckets create gs://dani-adhoc
 
 # List google cloud service accounts
 gcloud iam service-accounts list
+
+# Delete service account
+gcloud iam service-account delete <service_account>
 
 # List clusters
 gcloud container clusters list
@@ -83,9 +96,6 @@ gcloud projects get-iam-policy <project> \
 --flatten="bindings[].members" \
 --format='table(bindings.role)' \
 --filter="bindings.members:<service_account>"
-
-# List Google SQL tiers / server types
-gcloud sql tiers list
 
 # List load balancers
 gcloud compute forwarding-rules list
@@ -119,3 +129,18 @@ gcloud healthcare dicom-stores import gcs staging2-dicom --dataset=staging2 --gc
 
 # List iam workload identity pools
 gcloud iam workload-identity-pools list --location=global
+
+# List pubsub topics
+gcloud pubsub topics list
+
+# Delete pubsub topic
+gcloud pubsub topics delete <pubsub_topic>
+
+# List firewall rules
+gcloud compute firewall-rules list
+
+# Change the log level of a google sql postgres instance
+gcloud sql instances patch <database_instance> --database-flags=log_error_verbosity=default|terse|verbose
+
+# List database sql tiers
+gcloud sql tiers list --format="table[box](tier, RAM, DiskQuota)"

@@ -9,5 +9,11 @@ sudo tailscale up --exit-node=
 # Enable traffic through an exit node
 sudo tailscale up --exit-node=<exit_nodes>
 
+# start tailscale vpn
+sudo tailscale up --exit-node=<exit_nodes>
+
 # SSH into a Tailscale node
 tailscale ssh <nodes>
+
+# list / ls tailscale devices
+tailscale status

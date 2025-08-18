@@ -1,16 +1,19 @@
 % pyenv
 
-$ cpython_version: pyenv install --list | rg '^\s*\d.*' -N
+$ pyenv_install_candidates:   pyenv install --list | rg '^\s*\d.*' -N
+$ pyenv_installed_candidates: pyenv versions | rg '^\s*\d.*' -N
 
 # Update pyenv versions
 pyenv update
 
 # Install a python version
-PYTHON_CONFIGURE_OPTS=--enable-shared pyenv install <cpython_version>
+PYTHON_CONFIGURE_OPTS=--enable-shared pyenv install <pyenv_install_candidates>
 
 # Set a local pyenv version
-pyenv local <cpython_version>
+pyenv local <pyenv_installed_candidates>
+
+# Set the global python version
+pyenv global <pyenv_installed_candidates>
 
 # Show installed python versions by pyenv
 \ls -A -1 ~/.pyenv/versions
-

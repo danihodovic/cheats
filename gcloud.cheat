@@ -2,7 +2,7 @@
 
 $ account: gcloud auth list | grep '@'
 $ service_account: gcloud iam service-accounts list --- --column 2 --delimiter '\s\s+'
-$ instance: gcloud compute instances list --- --column 1 --delimiter '\s\s+'
+$ instance: gcloud compute instances list --format="table(name, machineType.basename(), networkInterfaces[0].networkIP, format('zones/{1}/instances/{2}', project, zone, name))" --- --column 4 --delimiter '\s\s+'
 $ instance_ip: gcloud compute instances list --- --column 5 --delimiter '\s\s+'
 $ database_instance: gcloud sql instances list --- --column 1 --delimiter '\s\s+'
 $ project: gcloud projects list --- --header-lines 1 --column 1 --delimiter '\s\s+'
@@ -11,6 +11,8 @@ $ zone: gcloud compute zones list --- --column 1 --delimiter '\s\s+'
 $ cluster: gcloud container clusters list --- --column 1 --delimiter '\s\s+'
 $ dataset: gcloud healthcare datasets list --- --column 1 --delimiter '\s\s+'
 $ pubsub_topic: gcloud pubsub topics list --- --column 1 --delimiter '\s\s+'
+$ bucket: gcloud storage ls --- --column 1 --delimiter '\s\s+'
+$ registry: gcloud artifacts repositories list --- --column 1 --delimiter '\s\s+'
 
 # Log in to a new GCP account
 gcloud init
@@ -28,11 +30,14 @@ gcloud sql connect <database_instance> --user=new_lantern --quiet
 gcloud iam service-accounts keys create key-file --iam-account=<service_account>
 echo You can find it in $PWD/key-file
 
-# List GCP server instances
+# List GCP server instances / vms
 gcloud compute instances list
 
 # SSH into a gcloud instance
-gcloud compute ssh <instance>
+gcloud compute ssh projects/$(gcloud config get project)/<instance> --tunnel-through-iap
+
+# Port-forward SSH tunnel
+gcloud compute ssh <instance> --tunnel-through-iap -- -NL 8080:localhost:8080
 
 # List gcloud static ip addresses
 gcloud compute addresses list
@@ -73,6 +78,9 @@ gcloud storage ls
 # Create a google storage bucket
 gcloud storage buckets create gs://dani-adhoc
 
+# List contents of a google storage bucket
+gcloud storage ls <bucket>
+
 # List google cloud service accounts
 gcloud iam service-accounts list
 
@@ -87,9 +95,6 @@ gcloud compute zones list
 
 # List images container images
 gcloud container images list --repository=us-central1-docker.pkg.dev/$project/$registry/$app
-
-# Authenticate / login to a GCP docker registry
-gcloud auth configure-docker us-central1-docker.pkg.dev
 
 # List service account permissions
 gcloud projects get-iam-policy <project> \
@@ -121,6 +126,9 @@ gcloud healthcare datasets list
 # List DICOM stores
 gcloud healthcare dicom-stores list --dataset=<dataset>
 
+# List HL7 stores
+gcloud healthcare hl7v2-stores list --dataset=<dataset>
+
 # Expore DICOM store to a GCS bucket
 gcloud healthcare dicom-stores export gcs staging-dicom --dataset=staging --gcs-uri-prefix=gs://dani-adhoc
 
@@ -144,3 +152,15 @@ gcloud sql instances patch <database_instance> --database-flags=log_error_verbos
 
 # List database sql tiers
 gcloud sql tiers list --format="table[box](tier, RAM, DiskQuota)"
+
+# List artifact registry
+gcloud artifacts repositories list
+
+# Authenticate / login to a GCP docker registry
+gcloud auth configure-docker us-central1-docker.pkg.dev
+
+# Make a connectivity ssh test for a VM
+gcloud compute ssh {vm} --zone={zone} --troubleshoot --tunnel-through-iap
+
+# List redis instances
+gcloud redis instances list --region=us-central1

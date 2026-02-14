@@ -1,0 +1,4 @@
+% route
+
+# find the default internet gateway / wifi login screen
+route -n

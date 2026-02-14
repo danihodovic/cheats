@@ -14,3 +14,6 @@ ssh-keygen -t ed25519 -C "git@github.com:tommyboytech/wario-client.git"
 
 # Generate an md5 fingerprint of an SSH key
 ssh-keygen -l -E md5 -f ~/.ssh/id_rsa.pub
+
+# create a public key from a private openssh key
+ssh-keygen -y -f {private_key} > {public_key}

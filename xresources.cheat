@@ -2,3 +2,9 @@
 
 # Reload xresources -- changes take affect on software restart
 xrdb ~/.Xresources
+
+# set dpi for laptop
+sed -i 's/^Xft.dpi:.*/Xft.dpi:\t96/' ~/.Xresources && xrdb ~/.Xresources
+
+# set dpi for desktop
+sed -i 's/^Xft.dpi:.*/Xft.dpi:\t120/' ~/.Xresources && xrdb ~/.Xresources

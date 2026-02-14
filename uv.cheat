@@ -1,0 +1,9 @@
+% uv
+
+$ python_version: uv python list --- --column 1 --delimiter '\s\s+'
+
+# Install a python version
+uv python install <python_version>
+
+# Upgrade python versions
+uv python upgrade

@@ -1,7 +1,9 @@
 % tailscale
 
+$ account: sudo tailscale switch -list --- --column 1 --delimiter '\s\s+' --header-lines 1
 $ nodes: tailscale status --- --column 2 --delimiter '\s\s+'
-$ exit_nodes: tailscale status | grep "offers exit node" --- --column 2 --delimiter '\s\s+'
+$ active_nodes: tailscale status --active --- --column 2 --delimiter '\s\s+'
+$ exit_nodes: tailscale status --active | grep "offers exit node" --- --column 2 --delimiter '\s\s+'
 
 # Disable traffic through an exit node
 sudo tailscale up --exit-node=
@@ -13,7 +15,13 @@ sudo tailscale up --exit-node=<exit_nodes>
 sudo tailscale up --exit-node=<exit_nodes>
 
 # SSH into a Tailscale node
-tailscale ssh <nodes>
+tailscale ssh <active_nodes>
 
 # list / ls tailscale devices
 tailscale status
+
+# tailscale login
+sudo tailscale login
+
+# switch / change tailscale accounts
+sudo tailscale switch <account>

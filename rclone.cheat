@@ -13,3 +13,6 @@ rclone copy -P my_file.txt <remote>:/opt/files
 
 # Sync a source directory a remote, modifying remote only
 rclone sync -P /my_dir <remote>:/my_dir
+
+# add a new remote
+rclone config

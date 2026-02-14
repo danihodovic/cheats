@@ -1,0 +1,9 @@
+% base64
+
+$ file: find .
+
+# base64 encode without newlines
+base64 -w0 <file>
+
+# base64 encode file
+base64 <file>

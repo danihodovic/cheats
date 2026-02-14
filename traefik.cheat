@@ -1,0 +1,4 @@
+# traefik
+
+# get traefik k8s logs
+kubectl logs -l app.kubernetes.io/name=traefik -f -n kube-system

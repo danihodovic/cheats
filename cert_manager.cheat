@@ -1,0 +1,4 @@
+% certs
+
+# get cert-manager logs
+kubectl logs -l app.kubernetes.io/instance=cert-manager -n cert-manager -f

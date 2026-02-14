@@ -7,3 +7,9 @@ ansible-inventory -i devops/environments/staging --graph
 
 # view ansible vault secrets of file
 ansible-vault view <vault_file> | nvim
+
+# print ansible facts for the machine
+ansible localhost -m ansible.builtin.setup
+
+# ansible ping server
+ansible all -i inventory.yaml -m ping

@@ -2,3 +2,6 @@
 
 # list files and binaries and paths contained in an apt package
 apt-file list openjdk-11-jdk
+
+# show package version installation candidates
+apt-cache showpkg terraform

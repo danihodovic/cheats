@@ -1,7 +1,16 @@
 % prometheus, promtool
 
 # analyze prometheus tsdb usage
-promtool tsdb analyze
+promtool tsdb analyze $PWD
 
 # delete a metric
 curl -X POST -g 'http://localhost:9090/api/v1/admin/tsdb/delete_series?match[]=pg_stat_activity_count' && curl -XPOST http://localhost:9090/api/v1/admin/tsdb/clean_tombstones
+
+# enter a prometheus pod
+kubectl exec -it $(kubectl get pod -l app.kubernetes.io/name=prometheus -n kube-prometheus -o jsonpath='{.items[-1].metadata.name}') -n kube-prometheus -- sh
+
+# port-forward prometheus
+kubectl port-forward service/$(kubectl get svc -l app=kube-prometheus-stack-prometheus -n kube-prometheus -o jsonpath='{.items[-1].metadata.name}') -n kube-prometheus 9090:9090
+
+# get prometheus logs
+kubectl logs -l app.kubernetes.io/name=prometheus --tail 100 -f -n kube-prometheus

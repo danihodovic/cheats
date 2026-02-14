@@ -9,6 +9,7 @@ $ configmap: kubectl get configmap --- --column 1 --header-lines 1 --delimiter '
 $ secret: kubectl get secret --- --column 1 --header-lines 1 --delimiter '\s\s+'
 $ ingress: kubectl get ingress --- --column 1 --header-lines 1 --delimiter '\s\s+'
 $ node: kubectl get nodes --- --column 1 --header-lines 1 --delimiter '\s\s+'
+$ pvc: kubectl get pvc --- --column 1 --header-lines 1 --delimiter '\s\s+'
 
 # List kubernetes resources
 kubectl api-resources
@@ -25,11 +26,17 @@ kubectl port-forward pod/<pod> 80:80
 # Get pods
 vd kubectl get pod
 
+# Get pods and list the node they're on
+kubectl get pods -l name=pgbouncer -o=custom-columns=NODE:.spec.nodeName,NAME:.metadata.name --no-headers
+
 # Get pods in all namespaces
 kubectl get pod -L app.kubernetes.io/name --all-namespaces
 
 # Describe a pod
 vd kubectl describe po <pod>
+
+# Delete / remove pod
+kubectl delete po <pod>
 
 # Start the kubernetes web ui proxy dashboard
 kubectl proxy
@@ -56,10 +63,10 @@ watch -n 1 'kubectl top node'
 kubectl exec -it <pod> -- bash
 
 # Enter a django shell
-kubectl exec -it <pod> -- ./manage.py shell_plus
+kubectl exec -it "$(kubectl get pod -l name=django --field-selector=status.phase=Running -o jsonpath='{.items[0].metadata.name}')" -- python manage.py shell_plus
 
 # Enter a pgcli shell
-kubectl exec -it <pod> -- ./manage.py pgcli
+kubectl exec -it "$(kubectl get pod -l name=django --field-selector=status.phase=Running -o jsonpath='{.items[0].metadata.name}')" -- python manage.py pgcli
 
 # List all kubernetes k8s namespaces
 kubectl get namespace
@@ -79,8 +86,8 @@ kubectl describe secret <secret>
 # Get secret contents
 kubectl get secret <secret> -o jsonpath='{.data}'
 
-# Run a container interactively in kubernetes
-kubectl run -i --tty busybox --image=busybox --restart=Never -- sh
+# Run a debug / ping / busybox container
+kubectl run -i --tty --rm debug --image=busybox --restart=Never -- sh
 
 # List deployments
 vd kubectl get deploy
@@ -123,13 +130,13 @@ kubectl patch pv postgres -p '{"spec":{"claimRef": null}}'
 kubectl cp --retries=5 <pod>:/app/data.json.gz data.json.gz
 
 # List Kubernetes events
-viddy "kubectl get events --sort-by='.lastTimestamp' | tac"
+vd "kubectl get events --sort-by='.lastTimestamp' | tac"
 
 # Output a certificate from a secret to disk
 kubectl get secret <secret> -o jsonpath='{.data.tls\.crt}' | base64 --decode > /tmp/cert.crt
 
 # List nodes
-kubectl get nodes -o wide
+vd kubectl get nodes -o wide
 
 # Describe a node
 kubectl describe node <node>
@@ -142,3 +149,48 @@ vd kubectl describe statefulset <statefulset>
 
 # Show logs for a pod matching a label
 kubectl logs -l name=nl-backend --tail 100 -f
+
+# Show top / resources for pods
+vd kubectl top pods
+
+# Show top / resources for nodes
+vd kubectl top nodes
+
+# Describe a pvc volume
+vd kubectl describe pvc <pvc>
+
+# Decode dockerconfig secret
+kubectl get secret gcr-json-key -o jsonpath="{.data.\.dockerconfigjson}" | base64 --decode
+
+# Delete pods in an error state such as ContainerStatusUnknown or Error
+kubectl delete pod --field-selector=status.phase=Failed
+
+# delete pods in an imagepullbackoff state
+kubectl get pods --all-namespaces grep ImagePullBackOff | awk '{print "kubectl delete pod -n "$1" "$2}' | bash
+
+# Merge kubeconfigs
+KUBECONFIG=~/.kube/config:~/.kube/config-2 kubectl config view --merge --flatten > merged-kubeconfig.yaml
+
+# Drain a GKE autopilot node
+kubectl drain <node> --delete-emptydir-data --ignore-daemonsets --force
+
+# List labels of deployment
+kubectl get deployment --show-labels
+
+# Rollout restart statefulset
+kubectl rollout restart sts <statefulset>
+
+# Rollout restart deployment
+kubectl rollout restart sts <deployment>
+
+# Get pod image
+kubectl get pods -l name=django -o jsonpath='{range .items[*]}{.spec.containers[*].image}{"\n"}{end}'
+
+# get ingress-nginx logs
+kubectl logs -n ingress-nginx deploy/ingress-nginx-controller -f --tail 100
+
+# get ingress-nginx config
+kubectl exec -n ingress-nginx -it $(kubectl get pod -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx -o name | tail -n 1) -- cat /etc/nginx/nginx.conf
+
+# delete failed jobs
+kubectl get jobs -o json | jq -r '.items[] | select(.status.failed > 0) | .metadata.name' | xargs -r kubectl delete job

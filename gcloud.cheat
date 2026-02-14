@@ -1,11 +1,12 @@
 % gcloud, gcp, google
 
+$ configuration: gcloud config configurations list --- --header-lines 1 --column 1 --delimiter '\s\s+'
+$ project: gcloud projects list --- --header-lines 1 --column 1 --delimiter '\s\s+'
 $ account: gcloud auth list | grep '@'
 $ service_account: gcloud iam service-accounts list --- --column 2 --delimiter '\s\s+'
 $ instance: gcloud compute instances list --format="table(name, machineType.basename(), networkInterfaces[0].networkIP, format('zones/{1}/instances/{2}', project, zone, name))" --- --column 4 --delimiter '\s\s+'
 $ instance_ip: gcloud compute instances list --- --column 5 --delimiter '\s\s+'
 $ database_instance: gcloud sql instances list --- --column 1 --delimiter '\s\s+'
-$ project: gcloud projects list --- --header-lines 1 --column 1 --delimiter '\s\s+'
 $ region: gcloud compute regions list --- --column 1 --delimiter '\s\s+'
 $ zone: gcloud compute zones list --- --column 1 --delimiter '\s\s+'
 $ cluster: gcloud container clusters list --- --column 1 --delimiter '\s\s+'
@@ -17,8 +18,23 @@ $ registry: gcloud artifacts repositories list --- --column 1 --delimiter '\s\s+
 # Log in to a new GCP account
 gcloud init
 
+# Activate a specific gcloud configuration
+gcloud config configurations activate <configuration>
+
+# Show current account
+gcloud config get-value account
+
+# Change account
+gcloud config set account user@email.com
+
+# Auth to gcloud
+gcloud auth login
+
 # Log in to Google cloud for use with Terraform. application-default
 gcloud auth application-default login
+
+# authenticate with a service account key file
+gcloud auth activate-service-account --key-file=PATH/TO/service-account.json
 
 # List projects
 gcloud projects list
@@ -33,11 +49,21 @@ echo You can find it in $PWD/key-file
 # List GCP server instances / vms
 gcloud compute instances list
 
-# SSH into a gcloud instance
+# describe a vm
+gcloud compute instances describe projects/$(gcloud config get project)/<instance>
+
+# delete a vm
+gcloud compute instances delete projects/$(gcloud config get project)/<instance>
+
+# stop a vm
+gcloud compute instances stop projects/$(gcloud config get project)/<instance>
+
+# ssh into a gcloud instance
 gcloud compute ssh projects/$(gcloud config get project)/<instance> --tunnel-through-iap
 
 # Port-forward SSH tunnel
-gcloud compute ssh <instance> --tunnel-through-iap -- -NL 8080:localhost:8080
+; gcloud compute start-iap-tunnel projects/$(gcloud config get project)/<instance> <port> --local-host-port=localhost:<port>
+gcloud compute ssh projects/$(gcloud config get project)/<instance> --tunnel-through-iap -- -NL <port>:localhost:<port>
 
 # List gcloud static ip addresses
 gcloud compute addresses list
@@ -51,7 +77,7 @@ gcloud config set compute/region <region>
 # Set or change gcloud config zone
 gcloud config set compute/zone <zone>
 
-# Log in to a kubectl cluster and get credentials
+# Log in to a kubectl cluster and get credentials. TODO FIX HEADER LINE AND ZONE
 gcloud container clusters get-credentials <cluster> --zone=
 
 # Describe a GKE cluster
@@ -102,7 +128,7 @@ gcloud projects get-iam-policy <project> \
 --format='table(bindings.role)' \
 --filter="bindings.members:<service_account>"
 
-# List load balancers
+# List load balancers / forwarding rules
 gcloud compute forwarding-rules list
 
 # List all roles
@@ -135,6 +161,9 @@ gcloud healthcare dicom-stores export gcs staging-dicom --dataset=staging --gcs-
 # Import from a GCS bucket to a DICOM store
 gcloud healthcare dicom-stores import gcs staging2-dicom --dataset=staging2 --gcs-uri="gs://dani-adhoc/**.dcm"
 
+# Generate a pre-signed url for a GCS object
+gcloud storage sign-url <bucket>dbdump.gz --duration=1h --method=GET
+
 # List iam workload identity pools
 gcloud iam workload-identity-pools list --location=global
 
@@ -150,6 +179,12 @@ gcloud compute firewall-rules list
 # Change the log level of a google sql postgres instance
 gcloud sql instances patch <database_instance> --database-flags=log_error_verbosity=default|terse|verbose
 
+# list sql operations
+gcloud sql operations list --instance=<database_instance> --filter='startTime>=2025-01-01T00:00:00Z'
+
+# describe one sql operation
+gcloud sql operations describe operation
+
 # List database sql tiers
 gcloud sql tiers list --format="table[box](tier, RAM, DiskQuota)"
 
@@ -164,3 +199,6 @@ gcloud compute ssh {vm} --zone={zone} --troubleshoot --tunnel-through-iap
 
 # List redis instances
 gcloud redis instances list --region=us-central1
+
+# List iam users and policies
+gcloud projects get-iam-policy <project>

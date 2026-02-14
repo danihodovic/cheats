@@ -1,0 +1,4 @@
+% borgmatic
+
+# borgmatic list repository
+borgmatic repo-list
